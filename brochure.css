@@ -1,0 +1,364 @@
+/* ============================================================
+   BROCHURE — on-screen reading experience + print-ready PDF.
+   Lives in the namasteyogis world (sand / green / pink, Cormorant
+   + Dancing Script + Nunito). Self-contained ".br-" classes so the
+   homepage's fit-to-screen overrides never touch it.
+   ============================================================ */
+
+.brochure{
+  background:var(--sand-200);
+  color:var(--ink);
+  font-family:var(--sans);
+}
+
+/* Each major block is a "page" — a generous band on screen,
+   a fresh sheet of paper in print. */
+.br-page{
+  position:relative;
+  padding:clamp(64px,9vw,128px) clamp(24px,6vw,96px);
+}
+.br-inner{max-width:1040px;margin:0 auto;position:relative;z-index:2}
+
+/* shared display type — bigger & calmer than the site's fit-to-screen titles */
+.br-eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:12px;letter-spacing:.32em;text-transform:uppercase;
+  font-weight:700;color:var(--green-700);margin:0;
+}
+.br-eyebrow::before{content:"";width:30px;height:1px;background:currentColor}
+.br-eyebrow.center{justify-content:center}
+
+.br-title{
+  font-family:var(--serif);font-weight:400;font-style:italic;
+  font-size:clamp(40px,6vw,80px);line-height:1.02;letter-spacing:-.01em;
+  color:var(--green-800);margin:18px 0 0;text-wrap:balance;
+}
+.br-title .script{
+  font-family:var(--script);font-style:normal;font-weight:600;
+  color:var(--pink-600);font-size:1.04em;line-height:.9;
+}
+.br-lede{
+  font-size:18px;line-height:1.7;color:var(--green-800);
+  max-width:62ch;margin:20px 0 0;
+}
+
+/* small leaf divider (re-uses the wordmark heart-leaf feeling) */
+.br-divider{display:flex;align-items:center;gap:18px;color:var(--sage)}
+.br-divider::before,.br-divider::after{content:"";height:1px;flex:1;background:currentColor;opacity:.55}
+.br-divider svg{flex:0 0 auto}
+
+/* ---------------------------------------------------------------
+   COVER
+   --------------------------------------------------------------- */
+.br-cover{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:clamp(28px,4vw,52px) clamp(28px,5vw,72px) clamp(40px,5vw,72px);
+  color:var(--sand-50);
+  background:var(--green-900);
+  overflow:hidden;
+}
+.br-cover-media{position:absolute;inset:0;z-index:0}
+.br-cover-media img{width:100%;height:100%;object-fit:cover;display:block}
+.br-cover-media::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg, rgba(31,58,31,.55) 0%, rgba(31,58,31,.12) 32%, rgba(31,58,31,.30) 60%, rgba(20,38,20,.85) 100%);
+}
+.br-cover-top,.br-cover-bottom{position:relative;z-index:2}
+.br-cover-top{
+  display:flex;align-items:center;justify-content:space-between;
+  letter-spacing:.04em;
+  /* clear the fixed action bar (top:18px, ~40px tall) so the issue label
+     never sits under the pills */
+  padding-top:46px;
+}
+.br-cover-brand{display:flex;align-items:center;gap:11px}
+.br-cover-brand .wordmark{
+  font-family:var(--script);font-weight:600;font-size:34px;line-height:1;
+}
+.br-cover-issue{
+  font-size:12px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;
+  opacity:.92;
+}
+.br-cover-bottom{max-width:760px}
+.br-cover .br-eyebrow{color:var(--pink-200)}
+.br-cover-title{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(52px,9vw,118px);line-height:.98;letter-spacing:-.015em;
+  margin:14px 0 0;text-wrap:balance;
+}
+.br-cover-title .script{
+  display:block;font-family:var(--script);font-style:normal;font-weight:600;
+  color:var(--pink-200);font-size:.66em;line-height:1;margin-top:6px;
+}
+.br-cover-meta{
+  display:flex;flex-wrap:wrap;gap:14px 40px;margin-top:34px;
+  font-size:15px;letter-spacing:.02em;
+}
+.br-cover-meta .label{
+  display:block;font-size:11px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--pink-200);font-weight:700;margin-bottom:5px;
+}
+.br-cover-meta .value{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--sand-50)}
+
+/* ---------------------------------------------------------------
+   INVITATION (intro band on paper)
+   --------------------------------------------------------------- */
+.br-invite{background:var(--sand-100)}
+.br-invite .br-inner{max-width:760px;text-align:center}
+.br-invite .br-eyebrow{justify-content:center}
+.br-invite-quote{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(26px,3.4vw,40px);line-height:1.3;color:var(--green-800);
+  margin:22px 0 0;text-wrap:balance;
+}
+.br-invite-quote .script{
+  font-family:var(--script);font-style:normal;color:var(--pink-600);font-size:1.1em;
+}
+.br-invite .br-lede{margin-left:auto;margin-right:auto;text-align:left;max-width:58ch}
+.br-invite-sign{
+  margin-top:26px;font-family:var(--script);font-size:30px;color:var(--green-700);
+}
+
+/* ---------------------------------------------------------------
+   DAILY RHYTHM
+   --------------------------------------------------------------- */
+.br-rhythm{background:var(--sand-200)}
+.br-section-head{margin-bottom:clamp(34px,5vw,60px)}
+.br-rhythm-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:clamp(20px,3vw,40px) clamp(28px,4vw,64px);
+}
+.br-day{
+  border-top:1.5px solid rgba(46,74,42,.22);
+  padding-top:20px;
+  break-inside:avoid;
+}
+.br-day-top{display:flex;align-items:baseline;gap:14px;margin-bottom:12px}
+.br-day-no{
+  font-family:var(--serif);font-style:italic;font-size:40px;line-height:.8;
+  color:var(--pink-400);
+}
+.br-day-date{
+  font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;
+  color:var(--green-700);
+}
+.br-day h3{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:25px;line-height:1.15;color:var(--green-800);margin:0 0 12px;
+}
+.br-day ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.br-day li{
+  position:relative;padding-left:18px;font-size:15px;line-height:1.5;color:var(--green-800);
+}
+.br-day li::before{
+  content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;
+  background:var(--pink-400);
+}
+
+/* ---------------------------------------------------------------
+   WHAT'S INCLUDED
+   --------------------------------------------------------------- */
+.br-included{background:var(--sand-100)}
+.br-included-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:2px;background:rgba(46,74,42,.16);
+  border:1px solid rgba(46,74,42,.16);border-radius:12px;overflow:hidden;
+  margin-top:clamp(30px,4vw,52px);
+}
+.br-incl{
+  background:var(--sand-50);padding:30px clamp(22px,2.6vw,34px);
+  display:flex;flex-direction:column;gap:9px;break-inside:avoid;
+}
+.br-incl-no{
+  font-size:12px;letter-spacing:.2em;font-weight:700;color:var(--pink-600);
+}
+.br-incl h3{
+  font-family:var(--serif);font-style:italic;font-weight:500;
+  font-size:24px;line-height:1.1;color:var(--green-800);margin:0;
+}
+.br-incl p{font-size:14.5px;line-height:1.6;color:var(--green-700);margin:0}
+
+/* a slim note row under the grid */
+.br-note{
+  margin-top:26px;font-size:14px;line-height:1.6;color:var(--green-700);
+  display:flex;align-items:flex-start;gap:10px;max-width:70ch;
+}
+.br-note .dot{flex:0 0 auto;width:7px;height:7px;border-radius:50%;background:var(--sage);margin-top:7px}
+
+/* ---------------------------------------------------------------
+   VILLA & LOCATION
+   --------------------------------------------------------------- */
+.br-villa{background:var(--sand-200)}
+.br-villa-grid{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(34px,5vw,72px);
+  align-items:center;margin-top:clamp(34px,4vw,56px);
+}
+.br-villa-copy h3{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(26px,3vw,38px);line-height:1.12;color:var(--green-800);margin:0 0 16px;
+}
+.br-villa-copy p{font-size:16px;line-height:1.72;color:var(--green-800);margin:0 0 16px;max-width:54ch}
+.br-villa-facts{
+  display:grid;grid-template-columns:1fr 1fr;gap:22px 32px;margin-top:30px;
+}
+.br-fact .label{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;
+  color:var(--pink-600);margin-bottom:6px;
+}
+.br-fact .value{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--green-800);line-height:1.25}
+.br-fact address{font-style:normal;font-size:15px;line-height:1.55;color:var(--green-800)}
+
+/* photo collage — re-uses the homepage's tilted-stack feeling */
+.br-villa-media{position:relative;height:clamp(380px,42vw,520px)}
+.br-villa-media .shot{
+  position:absolute;border-radius:8px;overflow:hidden;
+  box-shadow:0 26px 54px -28px rgba(31,58,31,.5);
+  border:8px solid var(--sand-50);
+}
+.br-villa-media .shot img{width:100%;height:100%;object-fit:cover;display:block}
+.br-villa-media .s1{inset:0 22% 28% 0;transform:rotate(-1.6deg);z-index:1}
+.br-villa-media .s2{width:48%;height:46%;right:0;bottom:0;transform:rotate(2deg);z-index:2}
+.br-villa-media .s3{width:34%;height:34%;left:6%;bottom:-18px;transform:rotate(-3deg);z-index:3}
+
+/* ---------------------------------------------------------------
+   PRICING (premium dark band)
+   --------------------------------------------------------------- */
+.br-pricing{
+  background:var(--green-800);color:var(--sand-50);
+}
+.br-pricing .br-eyebrow{color:var(--pink-200)}
+.br-pricing .br-title{color:var(--sand-50)}
+.br-pricing .br-title .script{color:var(--pink-200)}
+.br-pricing .br-lede{color:rgba(251,246,236,.85)}
+.br-price-card{
+  margin-top:clamp(34px,4vw,56px);
+  display:grid;grid-template-columns:1.1fr .9fr;
+  background:rgba(251,246,236,.06);
+  border:1px solid rgba(251,246,236,.18);border-radius:16px;overflow:hidden;
+}
+.br-price-main{padding:clamp(30px,3.4vw,46px)}
+.br-price-big{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(46px,6vw,76px);line-height:.95;color:var(--sand-50);
+}
+.br-price-sub{font-size:15px;letter-spacing:.04em;color:var(--pink-200);margin-top:10px}
+.br-price-line{height:1px;background:rgba(251,246,236,.18);margin:26px 0}
+.br-price-rows{display:flex;flex-direction:column;gap:16px}
+.br-price-row{display:flex;align-items:baseline;justify-content:space-between;gap:18px}
+.br-price-row .k{font-size:14px;color:rgba(251,246,236,.78)}
+.br-price-row .v{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--sand-50);text-align:right}
+.br-price-aside{
+  padding:clamp(30px,3.4vw,46px);
+  background:rgba(20,38,20,.4);
+  display:flex;flex-direction:column;gap:14px;
+}
+.br-price-aside h4{
+  font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;
+  color:var(--pink-200);margin:0 0 4px;
+}
+.br-price-aside ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+.br-price-aside li{
+  position:relative;padding-left:20px;font-size:14.5px;line-height:1.5;color:rgba(251,246,236,.9);
+}
+.br-price-aside li::before{
+  content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--pink-400);
+}
+.br-price-aside .muted li::before{background:var(--sage)}
+.br-price-aside .muted li{color:rgba(251,246,236,.66)}
+
+/* ---------------------------------------------------------------
+   CLOSING / how to reserve
+   --------------------------------------------------------------- */
+.br-closing{background:var(--sand-100);text-align:center}
+.br-closing .br-inner{max-width:680px}
+.br-closing .br-eyebrow{justify-content:center}
+.br-closing-title{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(38px,5vw,64px);line-height:1.04;color:var(--green-800);
+  margin:18px 0 0;text-wrap:balance;
+}
+.br-closing-title .script{font-family:var(--script);font-style:normal;color:var(--pink-600);font-size:1.05em}
+.br-closing p{font-size:17px;line-height:1.7;color:var(--green-800);margin:18px auto 0;max-width:48ch}
+.br-closing-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:34px}
+.br-contact{
+  margin-top:34px;font-size:14px;letter-spacing:.04em;color:var(--green-700);
+}
+.br-contact a{color:var(--wine);font-weight:700}
+
+/* ---------------------------------------------------------------
+   FLOATING ACTION BAR (screen only)
+   --------------------------------------------------------------- */
+.br-actions-bar{
+  position:fixed;top:18px;right:20px;z-index:60;
+  display:flex;gap:10px;align-items:center;
+}
+.br-pill{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:11px 20px;border-radius:999px;font-family:var(--sans);
+  font-size:13px;font-weight:700;letter-spacing:.04em;
+  cursor:pointer;transition:transform .2s, background .3s, color .3s;
+  box-shadow:0 10px 26px -14px rgba(31,58,31,.6);
+}
+.br-pill-print{background:var(--green-800);color:var(--sand-50)}
+.br-pill-print:hover{background:var(--green-900);transform:translateY(-1px)}
+.br-pill-apply{background:var(--pink-400);color:var(--sand-50)}
+.br-pill-apply:hover{background:var(--pink-600);transform:translateY(-1px)}
+.br-pill-back{background:rgba(251,246,236,.92);color:var(--green-800);backdrop-filter:blur(8px)}
+.br-pill-back:hover{background:#fff;transform:translateY(-1px)}
+.br-pill svg{flex:0 0 auto}
+
+/* ---------------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------------- */
+@media (max-width:860px){
+  .br-rhythm-grid{grid-template-columns:1fr}
+  .br-included-grid{grid-template-columns:1fr}
+  .br-villa-grid{grid-template-columns:1fr;gap:48px}
+  .br-villa-facts{grid-template-columns:1fr 1fr}
+  .br-price-card{grid-template-columns:1fr}
+  .br-cover-meta{gap:14px 28px}
+}
+@media (max-width:520px){
+  .br-actions-bar{top:auto;bottom:14px;right:14px;left:14px;justify-content:center}
+  .br-villa-facts{grid-template-columns:1fr}
+}
+
+/* ---------------------------------------------------------------
+   PRINT — A4 portrait, one section per sheet, full-bleed colour
+   --------------------------------------------------------------- */
+@media print{
+  @page{size:A4 portrait;margin:0}
+  html,body{background:#fff}
+  .br-actions-bar,.nav,.footer{display:none !important}
+
+  .brochure{background:#fff}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+  .br-page,.br-cover{
+    box-sizing:border-box;
+    page-break-after:always;break-after:page;
+    page-break-inside:avoid;
+  }
+  .br-page:last-of-type{page-break-after:auto;break-after:auto}
+
+  /* the cover fills a full sheet */
+  .br-cover{min-height:auto;height:297mm;padding:18mm 16mm}
+  .br-cover-top{padding-top:0}
+  .br-cover-media{position:absolute;inset:0}
+
+  /* tighten the reading bands so each fits one sheet */
+  .br-page{padding:18mm 16mm}
+  .br-title{font-size:34pt}
+  .br-cover-title{font-size:52pt}
+  .br-section-head{margin-bottom:10mm}
+  .br-rhythm-grid{gap:7mm 12mm}
+  .br-villa-media{height:120mm}
+  .br-price-big{font-size:40pt}
+
+  /* avoid orphaned cards across sheets */
+  .br-day,.br-incl,.br-fact,.br-price-card{break-inside:avoid;page-break-inside:avoid}
+
+  a{color:inherit;text-decoration:none}
+}
